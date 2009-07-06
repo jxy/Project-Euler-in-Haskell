@@ -1,7 +1,15 @@
-From http://projecteuler.net/
+My solutions for Project Euler[1] in literate Haskell.
+
+[1] http://projecteuler.net/
+======================================================================
+
 
 > import Data.Char
 > import Data.List
+
+
+Some simple mathematics.
+======================================================================
 
 > primes = let diff xs@(x:xt) ys@(y:yt) = case compare x y of
 >                                         LT -> x : (diff xt ys)
@@ -23,6 +31,11 @@ From http://projecteuler.net/
 >                          | n `rem` x == 0 = x:f xs (n `quot` x)
 >                          | otherwise = f xt n
 >                  in f primes n
+
+
+Problem starts here.
+======================================================================
+
 
 Problem 1
 05 October 2001
