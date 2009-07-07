@@ -47,6 +47,7 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 
 > p1 = sum $ filter (\x -> x `rem` 3 == 0 || x `rem` 5 == 0) [1..999]
 
+
 Problem 2
 19 October 2001
 
@@ -60,6 +61,7 @@ Find the sum of all the even-valued terms in the sequence which do not
 exceed four million.
 
 > p2 = sum $ filter even $ takeWhile (<= 4000000) fibonacci
+
 
 Problem 3
 02 November 2001
@@ -79,6 +81,7 @@ What is the largest prime factor of the number 600851475143 ?
 >                 | n `rem` x == 0 = f (x + 1) (n `quot` x)
 >       in f 2 600851475143
 
+
 Problem 4
 16 November 2001
 
@@ -94,6 +97,7 @@ numbers.
 >                         in s == reverse s
 >      in head . filter palindrome $ sortBy (flip compare) num
 
+
 Problem 5
 30 November 2001
 
@@ -104,6 +108,7 @@ What is the smallest number that is evenly divisible by all of the
 numbers from 1 to 20?
 
 > p5 = foldr lcm 1 [2..20]
+
 
 Problem 6
 14 December 2001
@@ -123,6 +128,7 @@ hundred natural numbers and the square of the sum.
 > p6 = let ns = [1..100]
 >      in sum [ x * y | x <- ns, y <- ns, x /= y]
 
+
 Problem 7
 28 December 2001
 
@@ -132,6 +138,7 @@ see that the 6^(th) prime is 13.
 What is the 10001^(st) prime number?
 
 > p7 = primes !! 10000
+
 
 Problem 8
 11 January 2002
@@ -184,6 +191,7 @@ number.
 >          f ds = product (take 5 ds) : f (tail ds)
 >      in maximum . f $ map digitToInt str
 
+
 Problem 9
 25 January 2002
 
@@ -202,6 +210,7 @@ Find the product abc.
 >               a < b, a^2 + b^2 == (1000 - a - b)^2]
 >      in head l
 
+
 Problem 10
 08 February 2002
 
@@ -210,3 +219,72 @@ The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 Find the sum of all the primes below two million.
 
 > p10 = sum $ takeWhile (< 2000000) primes
+
+
+Problem 11
+22 February 2002
+
+In the 20×20 grid below, four numbers along a diagonal line have been
+marked in red.
+
+08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48
+
+The product of these numbers is 26 × 63 × 78 × 14 = 1788696.
+
+What is the greatest product of four adjacent numbers in any direction
+(up, down, left, right, or diagonally) in the 20×20 grid?
+
+> p11 = let gridStr = "08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08\n\
+>                     \49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00\n\
+>                     \81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65\n\
+>                     \52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91\n\
+>                     \22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80\n\
+>                     \24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50\n\
+>                     \32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70\n\
+>                     \67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21\n\
+>                     \24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72\n\
+>                     \21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95\n\
+>                     \78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92\n\
+>                     \16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57\n\
+>                     \86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58\n\
+>                     \19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40\n\
+>                     \04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66\n\
+>                     \88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69\n\
+>                     \04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36\n\
+>                     \20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16\n\
+>                     \20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54\n\
+>                     \01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48"
+>           grid :: [[Int]]
+>           grid = map (map read . words) $ lines gridStr
+>           hFrom x y = zip (repeat x) [y..]
+>           vFrom x y = zip [x..] (repeat y)
+>           dFrom x y = zip [x..] [y..]
+>           dFrom' x y = zip [x..] [y, y-1..]
+>           nxy (x, y) = if x >= 0 && x < 20 && y >= 0 && y < 20
+>                        then grid !! x !! y
+>                        else 0
+>           indexList = [0..19]
+>       in maximum $
+>          map (product . take 4 . map nxy)
+>                  [f x y |
+>                   x <- indexList, y <- indexList,
+>                   f <- [hFrom, vFrom, dFrom, dFrom']]
